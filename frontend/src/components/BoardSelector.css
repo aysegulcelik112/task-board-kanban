@@ -1,0 +1,410 @@
+/* Pano Seçici - Ultra Modern Style */
+.board-selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px) saturate(180%);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 2rem;
+  margin-bottom: 0;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+.board-selector::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #667eea);
+  background-size: 200% 100%;
+  animation: borderFlow 4s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes borderFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.boards-list {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.board-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  border: 2px solid transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.board-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.board-item:hover::before {
+  left: 100%;
+}
+
+.board-item:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.18) 0%, rgba(118, 75, 162, 0.18) 100%);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+}
+
+.board-item.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 200% 200%;
+  animation: gradientActive 3s ease infinite;
+  color: white;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.45);
+  transform: scale(1.05);
+}
+
+@keyframes gradientActive {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.board-item.active .delete-board-btn {
+  opacity: 1;
+}
+
+.board-name {
+  font-weight: 500;
+}
+
+.delete-board-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s, transform 0.2s;
+  padding: 0.25rem;
+}
+
+.delete-board-btn:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.create-board-btn {
+  padding: 0.85rem 1.75rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 200% 200%;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.create-board-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.create-board-btn:hover::before {
+  left: 100%;
+}
+
+.create-board-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  animation: gradientShift 2s ease infinite;
+}
+
+.create-board-btn:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .board-selector {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .boards-list {
+    flex-wrap: wrap;
+  }
+
+  .create-board-btn {
+    width: 100%;
+  }
+}
+
+
+/* ============= ULTRA İYİLEŞTİRMELER ============= */
+
+/* Magnetic Effect for Board Pills */
+.board-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.board-item:not(.active):hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
+/* Delete Button Reveal */
+.delete-board-btn {
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.board-item:hover .delete-board-btn,
+.board-item.active .delete-board-btn {
+  transform: scale(1);
+}
+
+.delete-board-btn:hover {
+  transform: scale(1.3) rotate(90deg);
+}
+
+/* Board Name Typography Animation */
+.board-name {
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+.board-item:hover .board-name {
+  letter-spacing: 0.5px;
+}
+
+/* Staggered Board Entry Animation */
+.board-item {
+  animation: boardSlideIn 0.4s ease backwards;
+}
+
+.board-item:nth-child(1) { animation-delay: 0.1s; }
+.board-item:nth-child(2) { animation-delay: 0.15s; }
+.board-item:nth-child(3) { animation-delay: 0.2s; }
+.board-item:nth-child(4) { animation-delay: 0.25s; }
+.board-item:nth-child(5) { animation-delay: 0.3s; }
+
+@keyframes boardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Create Button Glow Pulse */
+.create-board-btn {
+  position: relative;
+}
+
+.create-board-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  background: inherit;
+  filter: blur(15px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.create-board-btn:hover::after {
+  opacity: 0.6;
+  animation: glowPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.4; }
+}
+
+/* Scrollable Indicator */
+.boards-list {
+  position: relative;
+}
+
+.boards-list::after {
+  content: '→';
+  position: absolute;
+  right: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  animation: scrollHint 2s ease-in-out infinite;
+}
+
+.boards-list::-webkit-scrollbar {
+  display: none; /* Hide for cleaner look */
+}
+
+@keyframes scrollHint {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-50%) translateX(5px); }
+}
+
+/* Active Board Indicator */
+.board-item.active::before {
+  content: '⭐';
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  font-size: 1rem;
+  animation: starTwinkle 2s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  50% { opacity: 0.7; transform: scale(1.2) rotate(180deg); }
+}
+
+/* Board Selector Container Enhancement */
+.board-selector {
+  position: relative;
+  animation: selectorSlideDown 0.5s ease backwards;
+}
+
+@keyframes selectorSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark Mode Enhancements */
+body.dark-mode .board-selector {
+  background: rgba(30, 30, 46, 0.98);
+  border: 1px solid rgba(90, 127, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(90, 127, 255, 0.15);
+}
+
+body.dark-mode .board-item {
+  background: linear-gradient(135deg, rgba(90, 127, 255, 0.1) 0%, rgba(138, 95, 204, 0.1) 100%);
+  border-color: rgba(90, 127, 255, 0.2);
+  color: #e0e0e0;
+}
+
+body.dark-mode .board-item:hover {
+  background: linear-gradient(135deg, rgba(90, 127, 255, 0.2) 0%, rgba(138, 95, 204, 0.2) 100%);
+  box-shadow: 0 4px 20px rgba(90, 127, 255, 0.3);
+}
+
+body.dark-mode .board-item.active {
+  background: linear-gradient(135deg, #4A5FD9 0%, #5A3A8C 50%, #C764E8 100%);
+  box-shadow: 
+    0 6px 20px rgba(90, 127, 255, 0.5),
+    0 0 40px rgba(90, 127, 255, 0.3);
+}
+
+body.dark-mode .create-board-btn {
+  background: linear-gradient(135deg, #4A5FD9 0%, #5A3A8C 50%, #C764E8 100%);
+  box-shadow: 
+    0 4px 15px rgba(90, 127, 255, 0.4),
+    0 0 30px rgba(90, 127, 255, 0.2);
+}
+
+body.dark-mode .create-board-btn:hover {
+  box-shadow: 
+    0 8px 25px rgba(90, 127, 255, 0.6),
+    0 0 50px rgba(90, 127, 255, 0.4);
+}
+
+/* Tooltip on Hover (optional enhancement) */
+.board-item {
+  position: relative;
+}
+
+.board-item[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  animation: tooltipFade 0.3s ease forwards;
+  margin-bottom: 10px;
+}
+
+@keyframes tooltipFade {
+  to { opacity: 1; }
+}
+
+/* Ripple Click Effect */
+.board-item::before,
+.create-board-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.board-item:active::before,
+.create-board-btn:active::before {
+  width: 200px;
+  height: 200px;
+}

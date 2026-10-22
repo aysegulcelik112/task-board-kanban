@@ -1,0 +1,243 @@
+/* Global stil dosyası - Ultra Modern & Professional */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: #333;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Custom properties for theming */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --accent-color: #f093fb;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --shadow-glow: 0 0 40px rgba(102, 126, 234, 0.3);
+  --border-radius: 16px;
+  --border-radius-lg: 24px;
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Custom Scrollbar - Modern Style */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: #333;
+}
+
+::-moz-selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: #333;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, input, select, textarea {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus outline styling */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(102, 126, 234, 0.5);
+  outline-offset: 2px;
+}
+
+/* ============= DARK MODE ============= */
+body.dark-mode {
+  --primary-gradient: linear-gradient(135deg, #4A5FD9 0%, #5A3A8C 50%, #C764E8 100%);
+  --primary-color: #5A7FFF;
+  --secondary-color: #8A5FCC;
+  --accent-color: #DD89FF;
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+}
+
+/* Dark Mode - Genel Arka Planlar */
+body.dark-mode .kanban-container,
+body.dark-mode .auth-form-container,
+body.dark-mode .profile-page,
+body.dark-mode .settings-page {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Dark Mode - Kartlar ve Paneller */
+body.dark-mode .kanban-header,
+body.dark-mode .board-selector,
+body.dark-mode .board-info,
+body.dark-mode .column,
+body.dark-mode .task-card,
+body.dark-mode .modal-content,
+body.dark-mode .task-modal-content,
+body.dark-mode .profile-card,
+body.dark-mode .settings-card,
+body.dark-mode .auth-form-card {
+  background: rgba(30, 30, 46, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(90, 127, 255, 0.2);
+}
+
+/* Dark Mode - Text Colors */
+body.dark-mode .board-title,
+body.dark-mode .column-header h3,
+body.dark-mode .task-title,
+body.dark-mode .modal-header h3,
+body.dark-mode .profile-card h3,
+body.dark-mode .settings-card h3,
+body.dark-mode .setting-label,
+body.dark-mode .auth-form-card h2,
+body.dark-mode label {
+  color: #e0e0e0;
+}
+
+/* Dark Mode - Secondary Text */
+body.dark-mode .board-description,
+body.dark-mode .task-description,
+body.dark-mode .setting-description,
+body.dark-mode .user-id,
+body.dark-mode .auth-subtitle {
+  color: #a0a0a0;
+}
+
+/* Dark Mode - Inputs */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: rgba(40, 40, 60, 0.8);
+  color: #e0e0e0;
+  border-color: rgba(90, 127, 255, 0.3);
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+  background: rgba(50, 50, 70, 0.9);
+  border-color: #5A7FFF;
+  box-shadow: 0 0 0 3px rgba(90, 127, 255, 0.2);
+}
+
+/* Dark Mode - Stat Cards */
+body.dark-mode .stat-card {
+  background: rgba(30, 30, 46, 0.95);
+  border: 1px solid rgba(90, 127, 255, 0.2);
+}
+
+body.dark-mode .stat-value {
+  color: #e0e0e0;
+}
+
+/* Dark Mode - Dropdown Menu */
+body.dark-mode .dropdown-menu {
+  background: rgba(30, 30, 46, 0.98);
+  border: 1px solid rgba(90, 127, 255, 0.3);
+}
+
+body.dark-mode .dropdown-header {
+  background: linear-gradient(135deg, #4A5FD9 0%, #5A3A8C 100%);
+}
+
+body.dark-mode .dropdown-item {
+  color: #e0e0e0;
+}
+
+body.dark-mode .dropdown-item:hover {
+  background: rgba(90, 127, 255, 0.15);
+}
+
+/* Dark Mode - Scrollbar */
+body.dark-mode ::-webkit-scrollbar-track {
+  background: rgba(30, 30, 46, 0.5);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #5A7FFF 0%, #8A5FCC 100%);
+}
+
+/* Dark Mode - Task Count Badges */
+body.dark-mode .task-count {
+  background: rgba(90, 127, 255, 0.2);
+  color: #5A7FFF;
+}
+
+/* Dark Mode - Empty States */
+body.dark-mode .no-board-message,
+body.dark-mode .empty-state {
+  background: rgba(30, 30, 46, 0.95);
+  color: #a0a0a0;
+}
+
+body.dark-mode .no-board-message p,
+body.dark-mode .empty-state p {
+  color: #a0a0a0;
+}
+
+/* Dark Mode - Borders */
+body.dark-mode .column-header,
+body.dark-mode .modal-header,
+body.dark-mode .setting-item {
+  border-bottom-color: rgba(90, 127, 255, 0.2);
+}
+
+/* Dark Mode - Hover States Enhanced */
+body.dark-mode .task-card:hover,
+body.dark-mode .column:hover,
+body.dark-mode .board-item:hover {
+  border-color: rgba(90, 127, 255, 0.4);
+  box-shadow: 0 12px 32px rgba(90, 127, 255, 0.3);
+}

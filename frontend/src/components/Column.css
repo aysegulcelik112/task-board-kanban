@@ -1,0 +1,375 @@
+/* Kanban Sütunu - Ultra Modern Glass Effect */
+.column {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.column::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.column:hover::before {
+  opacity: 1;
+}
+
+.column:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18), 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 3px solid #e0e0e0;
+  position: relative;
+}
+
+.column-header h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.task-count {
+  background-color: #e0e0e0;
+  color: #666;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.task-count:hover {
+  transform: scale(1.1);
+}
+
+/* Sütun türlerine göre renkler - Enhanced */
+.column-todo {
+  color: #3498db;
+}
+
+.column-todo .column-header {
+  border-bottom-color: #3498db;
+}
+
+.column-todo .task-count {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  color: #1976d2;
+}
+
+.column-in_progress {
+  color: #f39c12;
+}
+
+.column-in_progress .column-header {
+  border-bottom-color: #f39c12;
+}
+
+.column-in_progress .task-count {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  color: #e65100;
+}
+
+.column-done {
+  color: #2ecc71;
+}
+
+.column-done .column-header {
+  border-bottom-color: #2ecc71;
+}
+
+.column-done .task-count {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  color: #2e7d32;
+}
+
+.tasks-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #999;
+}
+
+.empty-state p {
+  margin: 0.5rem 0;
+}
+
+.empty-hint {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.add-task-btn {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 2px dashed rgba(102, 126, 234, 0.3);
+  border-radius: 16px;
+  color: #667eea;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.95rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-task-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(102, 126, 234, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.add-task-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.add-task-btn:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0.25) 100%);
+  border-color: #667eea;
+  border-style: solid;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.add-task-btn:active {
+  transform: translateY(-1px);
+}
+
+.tasks-list.dragging-over {
+  background-color: rgba(102, 126, 234, 0.05);
+  border: 2px dashed #667eea;
+  border-radius: 8px;
+}
+
+
+/* ============= ULTRA İYİLEŞTİRMELER ============= */
+
+/* Column Header Icon Animation */
+.column-header h3 {
+  transition: all 0.3s;
+}
+
+.column:hover .column-header h3 {
+  transform: scale(1.05);
+  letter-spacing: 0.5px;
+}
+
+/* Task List Smooth Scroll */
+.tasks-list {
+  scroll-behavior: smooth;
+}
+
+.tasks-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tasks-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.tasks-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+}
+
+.tasks-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+}
+
+/* Empty State Animation */
+.empty-state {
+  animation: emptyStateFade 1s ease backwards;
+}
+
+@keyframes emptyStateFade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Column Glow Effect */
+.column {
+  position: relative;
+}
+
+.column::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, currentColor, transparent);
+  opacity: 0;
+  border-radius: 24px;
+  z-index: -1;
+  filter: blur(20px);
+  transition: opacity 0.3s;
+}
+
+.column:hover::after {
+  opacity: 0.3;
+}
+
+/* Add Task Button Enhanced */
+.add-task-btn {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.add-task-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Column Badge Animations */
+.column-todo .task-count {
+  animation: todoBounce 3s ease-in-out infinite;
+}
+
+.column-in_progress .task-count {
+  animation: progressSpin 4s linear infinite;
+}
+
+.column-done .task-count {
+  animation: doneShine 3s ease-in-out infinite;
+}
+
+@keyframes todoBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes progressSpin {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+@keyframes doneShine {
+  0%, 100% { box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3); }
+  50% { box-shadow: 0 4px 16px rgba(46, 204, 113, 0.6); }
+}
+
+/* Dragging Over Effect Enhanced */
+.tasks-list.dragging-over {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 3px dashed #667eea;
+  border-radius: 12px;
+  animation: draggingPulse 1s ease-in-out infinite;
+}
+
+@keyframes draggingPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.02); opacity: 0.9; }
+}
+
+/* Column Number Indicator */
+.column-header::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: currentColor;
+  border-radius: 10px;
+  opacity: 0.3;
+  transition: all 0.3s;
+}
+
+.column:hover .column-header::after {
+  height: 100%;
+  opacity: 0.6;
+}
+
+/* Dark Mode Enhancements */
+body.dark-mode .column {
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(90, 127, 255, 0.1);
+}
+
+body.dark-mode .column:hover {
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.6),
+    0 0 50px rgba(90, 127, 255, 0.3);
+}
+
+body.dark-mode .add-task-btn {
+  background: linear-gradient(135deg, rgba(90, 127, 255, 0.2) 0%, rgba(138, 95, 204, 0.2) 100%);
+  border-color: rgba(90, 127, 255, 0.5);
+  color: #5A7FFF;
+}
+
+body.dark-mode .add-task-btn:hover {
+  background: linear-gradient(135deg, rgba(90, 127, 255, 0.3) 0%, rgba(138, 95, 204, 0.3) 100%);
+  border-color: #5A7FFF;
+  box-shadow: 0 4px 20px rgba(90, 127, 255, 0.3);
+}
+
+/* Smooth Column Entry */
+.column {
+  animation: columnSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+@keyframes columnSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

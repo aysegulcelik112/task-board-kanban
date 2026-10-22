@@ -1,0 +1,400 @@
+/* Görev Modalı Stilleri - 3 Bölgeli Sticky Layout */
+.task-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 3rem 1rem;
+  animation: fadeIn 0.3s ease;
+  /* Modal üst kısmı kesilmesin diye scroll ekle */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.task-modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 95%;
+  max-width: 540px;
+  max-height: 85vh;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+  color: #333;
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* Flex layout: Header, Body, Footer */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Modal'ın kendisi dikey olarak ortalanmalı */
+  margin: auto 0;
+  align-self: center;
+}
+
+/* Gradient çizgisi header içinde olsun */
+.task-modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+  border-radius: 20px 20px 0 0;
+  z-index: 15;
+  pointer-events: none;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ÜST BÖLGE - STICKY HEADER */
+.task-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Gradient için üstten padding ekle, toplam padding dengeli olsun */
+  padding: 1.75rem 2rem 1.5rem;
+  padding-top: calc(1.75rem + 4px); /* Gradient yüksekliği + normal padding */
+  border-bottom: 2px solid #f0f0f0;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  /* Sticky - her zaman üstte */
+  flex-shrink: 0;
+  z-index: 10;
+  position: relative;
+  /* Margin kaldırıldı, gradient üzerinde kalıyor */
+}
+
+.task-modal-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  flex: 1;
+}
+
+/* Close Button - Daha Görünür */
+.close-btn {
+  background: #f5f5f5;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.close-btn:hover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* ORTA BÖLGE - SCROLLABLE BODY */
+.task-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.5rem 2rem 1.5rem;
+  background: white;
+  /* Max height: viewport'un 60%'i kadar, taşarsa scroll */
+  max-height: calc(85vh - 200px); /* Header + Footer yüksekliği çıkarılmış */
+}
+
+/* Custom Scrollbar - Şık ve İnce */
+.task-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-modal-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+  margin: 8px 0;
+}
+
+.task-modal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.task-modal-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+}
+
+/* ALT BÖLGE - STICKY FOOTER */
+.task-modal-footer {
+  padding: 1.5rem 2rem;
+  border-top: 2px solid #f0f0f0;
+  background: white;
+  border-radius: 0 0 20px 20px;
+  /* Sticky - her zaman altta */
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+/* Form Grupları */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1rem;
+  background-color: white;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+/* Dropdown Select - Genişletilmiş */
+.form-group select {
+  cursor: pointer;
+  font-weight: 500;
+  /* Enough space for icon + text + chevron */
+  padding-right: 2.5rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23666' d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 12px;
+}
+
+.form-group select:hover {
+  border-color: #c0c0c0;
+}
+
+/* Form Row - Yan Yana Alanlar */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+/* Modal Actions - Footer'da */
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 0.875rem 1.75rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cancel-btn {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.cancel-btn:hover {
+  background-color: #e8e8e8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Dark Mode */
+body.dark-mode .task-modal-content {
+  background: rgba(30, 30, 46, 0.98);
+  border: 1px solid rgba(90, 127, 255, 0.3);
+}
+
+body.dark-mode .task-modal-header,
+body.dark-mode .task-modal-body,
+body.dark-mode .task-modal-footer {
+  background: rgba(30, 30, 46, 0.98);
+  border-color: rgba(90, 127, 255, 0.2);
+}
+
+body.dark-mode .task-modal-header h3 {
+  background: linear-gradient(135deg, #5A7FFF 0%, #8A5FCC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .close-btn {
+  background: rgba(60, 60, 80, 0.8);
+  color: #e0e0e0;
+}
+
+body.dark-mode .close-btn:hover {
+  background: linear-gradient(135deg, #4A5FD9 0%, #5A3A8C 100%);
+}
+
+body.dark-mode .form-group label {
+  color: #e0e0e0;
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea,
+body.dark-mode .form-group select {
+  background: rgba(40, 40, 60, 0.8);
+  color: #e0e0e0;
+  border-color: rgba(90, 127, 255, 0.3);
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group textarea:focus,
+body.dark-mode .form-group select:focus {
+  background: rgba(50, 50, 70, 0.9);
+  border-color: #5A7FFF;
+  box-shadow: 0 0 0 3px rgba(90, 127, 255, 0.2);
+}
+
+body.dark-mode .cancel-btn {
+  background: rgba(60, 60, 80, 0.8);
+  color: #e0e0e0;
+}
+
+body.dark-mode .cancel-btn:hover {
+  background: rgba(70, 70, 90, 0.9);
+}
+
+body.dark-mode .task-modal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #4A5FD9 0%, #5A3A8C 100%);
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .task-modal-content {
+    width: 100%;
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: 16px 16px 0 0;
+    /* Mobile'de tam genişlik */
+  }
+
+  .task-modal-header,
+  .task-modal-body,
+  .task-modal-footer {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .task-modal-body {
+    max-height: calc(95vh - 160px);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+  }
+}
